@@ -6,7 +6,12 @@ body {
     min-height: 100vh;
     background-color: #f0f0f0;
     margin: 0;
+    background-image: url(../imagens/sala\ de\ aula.jpg); /* Substitua pelo caminho da sua imagem de fundo */
+    background-size: cover; /* Para cobrir toda a página */
+    background-repeat: no-repeat; /* Para evitar repetição */
+    background-position: center; /* Para centralizar a imagem */
 }
+
 
 .container {
     background-color: #fff;
@@ -14,6 +19,15 @@ body {
     border-radius: 15px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     text-align: center;
+    background-image: url(../imagens/quadro.jpg); /* Substitua pelo caminho da sua imagem */
+    background-size: cover; /* Para cobrir todo o container, mantendo a proporção */
+    background-repeat: no-repeat; /* Para evitar que a imagem se repita */
+    background-position: center; /* Para centralizar a imagem */
+}
+
+.container h1 {
+    /* Outros estilos do título podem estar aqui */
+    color: rgb(255, 255, 255); /* Altera a cor do texto para azul */
 }
 
 .grid-container {
@@ -26,50 +40,56 @@ body {
 .card {
     width: 100px;
     height: 100px;
-    background-color: #ddd;
-    border-radius: 5px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 2em;
+    perspective: 1000px;
     cursor: pointer;
     position: relative;
-    transform-style: preserve-3d;
-    transition: transform 0.3s;
 }
 
-.card.flipped {
-    transform: rotateY(180deg);
-}
-
-.card.matched {
-    opacity: 0.7; /* Mantém a transparência */
-    /* Tentativa de manter a parte de trás visível */
-    transform: rotateY(180deg) !important; /* Garante a rotação */
-}
-
-.front, .back {
+.card .front,
+.card .back {
     position: absolute;
     width: 100%;
     height: 100%;
     backface-visibility: hidden;
+    border-radius: 5px;
     display: flex;
     justify-content: center;
     align-items: center;
-    border-radius: 5px;
+    transition: transform 0.6s;
+    font-size: 2em;
 }
 
-.front {
+/* Lado da frente (com "?") */
+.card .front {
     background-color: #af4f4c;
     color: white;
     transform: rotateY(0deg);
-    
+    z-index: 2;
 }
 
-.back {
+/* Lado de trás (com imagem) */
+.card .back {
     background-color: #f9f9f9;
-    color: #333;
+    color: #912b2b;
     transform: rotateY(180deg);
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+}
+
+.card.flipped .front {
+    transform: rotateY(180deg);
+    z-index: 1;
+}
+
+.card.flipped .back {
+    transform: rotateY(0deg);
+    z-index: 2;
+}
+
+.card.matched {
+    opacity: 0.7;
+    pointer-events: none;
 }
 
 .back img {
@@ -79,5 +99,6 @@ body {
 
 #message {
     margin-top: 20px;
-    font-weight: bold;
+    font-weight: bold;
+    color: #ffffff;
 }
